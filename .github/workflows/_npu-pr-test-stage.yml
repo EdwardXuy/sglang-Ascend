@@ -254,9 +254,9 @@ jobs:
             python3 -c "from datasets import LargeList" 2>/dev/null || pip install --force-reinstall --no-deps "datasets==4.8.5"
             python3 -c "from datasets import LargeList" || { echo "ERROR: datasets still broken after reinstall"; exit 1; }
 
-            # Preload hellaswag (rowanz/hellaswag DMCA -> 404; download_and_cache_file
-            # skips when the file exists). MUST stay a heredoc at this indent level: a
-            # multi-line python3 -c inherits YAML indentation and dies (IndentationError).
+            # Preload the hellaswag validation split to /tmp/hellaswag_val.jsonl for tests.
+            # Loads the 'Rowan/hellaswag' validation split, converts each row's 'label' to an integer,
+            # and writes each example as a JSON Lines file at /tmp/hellaswag_val.jsonl.
             python3 - <<'PYEOF' || echo "WARN: hellaswag preload failed; test_accuracy_floor will fail if /tmp file is absent"
           import json
           from datasets import load_dataset
