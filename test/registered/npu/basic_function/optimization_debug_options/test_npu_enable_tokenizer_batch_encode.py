@@ -26,10 +26,8 @@ BATCH_SIZE = 8  # Number of prompts per request
 
 class TestTokenizerBatchEncode(CustomTestCase):
     """Testcase: verify --enable-tokenizer-batch-encode.
-
     Compares avg per-prompt tokenization latency, batch vs sequential, then
     checks e2e correctness with the flag on (gsm8k).
-
     [Test Category] Parameter
     [Test Target] --enable-tokenizer-batch-encode
     """
