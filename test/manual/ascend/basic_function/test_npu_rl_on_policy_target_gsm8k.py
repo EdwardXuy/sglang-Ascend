@@ -4,7 +4,7 @@ import unittest
 from sglang.test.ascend.e2e.test_npu_accuracy_utils import (
     TestNpuAccuracyTestCaseBase,
 )
-from sglang.test.ascend.test_ascend_utils import QWEN3_4B_WEIGHTS_PATH
+#from sglang.test.ascend.test_ascend_utils import QWEN3_4B_WEIGHTS_PATH
 from sglang.test.ci.ci_register import register_npu_ci
 
 register_npu_ci(
@@ -22,7 +22,7 @@ ENVS = {
     "GLOO_SOCKET_IFNAME": "lo",
     # When using the Cann9.1.0 version image, it is necessary to modify the environment variables
     "LD_LIBRARY_PATH": (
-        "/usr/local/Ascend/cann-9.0.0/opp/vendors/batch_invariant/op_api/lib/:"
+        "/usr/local/Ascend/cann-9.1.0/opp/vendors/batch_invariant/op_api/lib/:"
         f"{os.environ.get('LD_LIBRARY_PATH', '')}"
     ),
 }
@@ -60,7 +60,7 @@ class TestNPUQwen3_4B_1P_GSM8K(TestNpuAccuracyTestCaseBase):
     [Test Target] --rl-on-policy-target
     """
 
-    model = QWEN3_4B_WEIGHTS_PATH
+    model = "/mnt/share/dzc/data/modelscope/hub/models/Qwen/Qwen3-4B"
     envs = ENVS
     other_args = OTHER_ARGS
     accuracy = 0.80

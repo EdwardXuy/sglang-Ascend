@@ -7,7 +7,7 @@ import requests
 
 from sglang.srt.utils import kill_process_tree
 from sglang.test.ascend.test_ascend_utils import (
-    QWEN3_30B_A3B_WEIGHTS_PATH,
+    # QWEN3_30B_A3B_WEIGHTS_PATH,
     logger,
     run_command,
 )
@@ -27,8 +27,8 @@ class TestNpuTrainInferenceConsistencyTP4(CustomTestCase):
     [Test Target] --enable-deterministic-inference, --attention-backend, --sampling-backend
     """
 
-    MODEL = QWEN3_30B_A3B_WEIGHTS_PATH
-    BASE_URL = DEFAULT_URL_FOR_TEST
+    MODEL = "/mnt/share/dzc/data/modelscope/hub/models/Qwen/Qwen3-30B-A3B"
+    BASE_URL = "http://127.0.0.1:22100"
 
     OTHER_ARGS = [
         "--trust-remote-code",
@@ -36,6 +36,11 @@ class TestNpuTrainInferenceConsistencyTP4(CustomTestCase):
         "ascend",
         "--sampling-backend",
         "ascend",
+        "--chunked-prefill-size",
+        "-1",
+        "--disable-radix-cache",
+        "--page-size",
+        "128",
         "--mem-fraction-static",
         "0.8",
         "--disable-cuda-graph",

@@ -7,7 +7,7 @@ import requests
 
 from sglang.srt.utils import kill_process_tree
 from sglang.test.ascend.test_ascend_utils import (
-    QWEN3_4B_WEIGHTS_PATH,
+    # QWEN3_4B_WEIGHTS_PATH,
     logger,
     run_command,
 )
@@ -27,8 +27,8 @@ class TestNpuBatchInvarianceNoTp(CustomTestCase):
     [Test Target] --enable-deterministic-inference, --attention-backend, --sampling-backend
     """
 
-    MODEL = QWEN3_4B_WEIGHTS_PATH
-    BASE_URL = DEFAULT_URL_FOR_TEST
+    MODEL = "/mnt/share/dzc/data/modelscope/hub/models/Qwen/Qwen3-4B"
+    BASE_URL = "http://127.0.0.1:22200"
 
     OTHER_ARGS = [
         "--trust-remote-code",
@@ -37,7 +37,10 @@ class TestNpuBatchInvarianceNoTp(CustomTestCase):
         "--sampling-backend",
         "ascend",
         "--chunked-prefill-size",
-        "2048",
+        "-1",
+        "--disable-radix-cache",
+        "--page-size",
+        "128",
         "--mem-fraction-static",
         "0.75",
         "--disable-cuda-graph",
@@ -163,7 +166,10 @@ class TestNpuBatchInvarianceTp(TestNpuBatchInvarianceNoTp):
         "--sampling-backend",
         "ascend",
         "--chunked-prefill-size",
-        "2048",
+        "-1",
+        "--disable-radix-cache",
+        "--page-size",
+        "128",
         "--mem-fraction-static",
         "0.7",
         "--disable-cuda-graph",
