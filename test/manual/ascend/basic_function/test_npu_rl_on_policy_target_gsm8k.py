@@ -4,7 +4,7 @@ import unittest
 from sglang.test.ascend.e2e.test_npu_accuracy_utils import (
     TestNpuAccuracyTestCaseBase,
 )
-from sglang.test.ascend.test_ascend_utils import QWEN3_4B_WEIGHTS_PATH
+from sglang.test.ascend.test_ascend_utils import QWEN3_4B_WEIGHTS_PATH, is_npu_a5
 from sglang.test.ci.ci_register import register_npu_ci
 
 register_npu_ci(
@@ -22,10 +22,17 @@ ENVS = {
     "GLOO_SOCKET_IFNAME": "lo",
     # When using the Cann9.1.0 version image, it is necessary to modify the environment variables
     "LD_LIBRARY_PATH": (
-        "/usr/local/Ascend/cann-9.1.0/opp/vendors/batch_invariant/op_api/lib/:"
+        "/usr/local/Ascend/cann-9.0.0/opp/vendors/batch_invariant/op_api/lib/:"
         f"{os.environ.get('LD_LIBRARY_PATH', '')}"
     ),
 }
+
+# A5 (950) images ship CANN 9.1.0; point the batch_invariant vendor lib accordingly
+if is_npu_a5():
+    ENVS["LD_LIBRARY_PATH"] = (
+        "/usr/local/Ascend/cann-9.1.0/opp/vendors/batch_invariant/op_api/lib/:"
+        f"{os.environ.get('LD_LIBRARY_PATH', '')}"
+    )
 
 OTHER_ARGS = [
     "--attention-backend",

@@ -3,7 +3,10 @@ import unittest
 from types import SimpleNamespace
 
 from sglang.srt.utils import kill_process_tree
-from sglang.test.ascend.test_ascend_utils import QWEN3_30B_A3B_W8A8_WEIGHTS_PATH
+from sglang.test.ascend.test_ascend_utils import (
+    QWEN3_30B_A3B_W8A8_WEIGHTS_PATH,
+    is_npu_a5,
+)
 from sglang.test.ci.ci_register import register_npu_ci
 from sglang.test.run_eval import run_eval
 from sglang.test.test_utils import (
@@ -28,6 +31,8 @@ class TestDeepepLowlatencyQwen3(CustomTestCase):
     def setUpClass(cls):
         cls.model = QWEN3_30B_A3B_W8A8_WEIGHTS_PATH
         cls.base_url = DEFAULT_URL_FOR_TEST
+        if is_npu_a5():
+            os.environ["ASCEND_USE_FIA"] = "1"
         cls.process = popen_launch_server(
             cls.model,
             cls.base_url,
