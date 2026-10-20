@@ -7,7 +7,7 @@ import requests
 
 from sglang.srt.utils import kill_process_tree
 from sglang.test.ascend.test_ascend_utils import (
-    # QWEN3_4B_WEIGHTS_PATH,
+    QWEN3_4B_WEIGHTS_PATH,
     logger,
     run_command,
 )
@@ -27,7 +27,7 @@ class TestNpuBatchInvarianceNoTp(CustomTestCase):
     [Test Target] --enable-deterministic-inference, --attention-backend, --sampling-backend
     """
 
-    MODEL = "/mnt/share/dzc/data/modelscope/hub/models/Qwen/Qwen3-4B"
+    MODEL = QWEN3_4B_WEIGHTS_PATH
     BASE_URL = "http://127.0.0.1:22200"
 
     OTHER_ARGS = [

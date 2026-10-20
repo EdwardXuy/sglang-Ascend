@@ -4,10 +4,10 @@ import unittest
 import requests
 
 from sglang.srt.utils import kill_process_tree
-#from sglang.test.ascend.test_ascend_utils import (
-#    QWEN3_30B_A3B_INSTRUCT_2507_THEO_STYLE_LORA_PATH,
-#    QWEN3_30B_A3B_INSTRUCT_2507_WEIGHTS_PATH,
-#)
+from sglang.test.ascend.test_ascend_utils import (
+    QWEN3_30B_A3B_INSTRUCT_2507_THEO_STYLE_LORA_PATH,
+    QWEN3_30B_A3B_INSTRUCT_2507_WEIGHTS_PATH,
+)
 from sglang.test.ci.ci_register import register_npu_ci
 from sglang.test.test_utils import (
     DEFAULT_TIMEOUT_FOR_SERVER_LAUNCH,
@@ -28,11 +28,11 @@ class TestExpertsSharedOuterLora(CustomTestCase):
     [Test Target] --experts-shared-outer-loras
     """
 
-    lora_a = "/mnt/share/dzc/data/modelscope/hub/models/Qwen3-30B-A3B-Instruct-2507-theo-style-lora"
+    lora_a = QWEN3_30B_A3B_INSTRUCT_2507_THEO_STYLE_LORA_PATH
 
     @classmethod
     def setUpClass(cls):
-        cls.model = "/mnt/share/dzc/data/modelscope/hub/models/Qwen/Qwen3-30B-A3B-Instruct-2507"
+        cls.model = QWEN3_30B_A3B_INSTRUCT_2507_WEIGHTS_PATH
         cls.base_url = DEFAULT_URL_FOR_TEST
         cls.out_log_file = tempfile.NamedTemporaryFile(
             mode="w+", delete=True, suffix="out.log"

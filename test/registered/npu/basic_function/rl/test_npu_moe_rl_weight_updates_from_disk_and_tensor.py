@@ -45,8 +45,7 @@ register_npu_ci(
     nightly=True,
 )
 
-QWEN3_30B_A3B_INSTRUCT = "/mnt/share/dzc/data/modelscope/hub/models/Qwen/Qwen3-30B-A3B-Instruct-2507"
-QWEN3_30B_A3B = "/mnt/share/dzc/data/modelscope/hub/models/Qwen/Qwen3-30B-A3B"
+
 # ──────────────────────────────────────────────────────────────────────
 # Common NPU server launch args
 # ──────────────────────────────────────────────────────────────────────
@@ -195,7 +194,7 @@ class _BaseNPUMoEWeightUpdateTest(CustomTestCase):
         )
         resp.raise_for_status()
         return resp.json()
-    
+
     def _update_tensor(self, payload, timeout=600):
         """POST /update_weights_from_tensor is only accepted inside a
         weight-update session opened by /begin_weight_update and closed by
@@ -207,9 +206,7 @@ class _BaseNPUMoEWeightUpdateTest(CustomTestCase):
         if not begin.get("success"):
             raise RuntimeError(f"begin_weight_update failed: {begin}")
         try:
-            resp = self._post(
-                "/update_weights_from_tensor", payload, timeout=timeout
-            )
+            resp = self._post("/update_weights_from_tensor", payload, timeout=timeout)
             if not resp.get("success"):
                 raise RuntimeError(f"update_weights_from_tensor failed: {resp}")
             return resp

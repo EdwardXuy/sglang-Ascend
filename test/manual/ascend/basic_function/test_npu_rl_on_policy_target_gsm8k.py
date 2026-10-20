@@ -4,7 +4,7 @@ import unittest
 from sglang.test.ascend.e2e.test_npu_accuracy_utils import (
     TestNpuAccuracyTestCaseBase,
 )
-#from sglang.test.ascend.test_ascend_utils import QWEN3_4B_WEIGHTS_PATH
+from sglang.test.ascend.test_ascend_utils import QWEN3_4B_WEIGHTS_PATH
 from sglang.test.ci.ci_register import register_npu_ci
 
 register_npu_ci(
@@ -60,7 +60,7 @@ class TestNPUQwen3_4B_1P_GSM8K(TestNpuAccuracyTestCaseBase):
     [Test Target] --rl-on-policy-target
     """
 
-    model = "/mnt/share/dzc/data/modelscope/hub/models/Qwen/Qwen3-4B"
+    model = QWEN3_4B_WEIGHTS_PATH
     envs = ENVS
     other_args = OTHER_ARGS
     accuracy = 0.80

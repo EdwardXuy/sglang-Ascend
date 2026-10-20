@@ -11,7 +11,7 @@ from sglang.test.test_utils import (
     CustomTestCase,
     popen_launch_server,
 )
-DEEPSEEK_CODER_V2_LITE_WEIGHTS_PATH="/mnt/share/dzc/data/modelscope/hub/models/deepseek-ai/DeepSeek-Coder-V2-Lite-Instruct"
+
 register_npu_ci(est_time=400, suite="base-b-test-2-npu-a3")
 register_npu_ci(est_time=400, suite="nightly-2-npu-a3", nightly=True)
 register_npu_ci(est_time=400, suite="nightly-1-npu-a5", nightly=True)
@@ -35,7 +35,6 @@ class TestMoreRunnerBackendTriton(CustomTestCase):
             DEFAULT_URL_FOR_TEST,
             DEFAULT_TIMEOUT_FOR_SERVER_LAUNCH,
             other_args=[
-                "--base-gpu-id","6",
                 "--trust-remote-code",
                 "--attention-backend",
                 "ascend",
