@@ -21,12 +21,12 @@ register_npu_ci(est_time=400, suite="full-16-npu-a3", nightly=True)
 register_npu_ci(est_time=400, suite="full-8-npu-a5", nightly=True)
 
 
-# 模型路径：使用 dzc 环境实际的 Llama-4-Scout-17B-16E-Instruct
+# Model path: Llama-4-Scout-17B-16E-Instruct from the shared dzc mount
 _MODEL_PATH = (
     "/mnt/share/dzc/data/modelscope/hub/models/meta-llama/Llama-4-Scout-17B-16E-Instruct"
 )
 
-# 启动参数：对齐开发给出的命令
+# Launch args: aligned with the command provided by dev
 _BASE_ARGS = [
     "--tp-size",
     4,
@@ -47,15 +47,15 @@ _BASE_ARGS = [
     0,
 ]
 
-# 环境变量：只保留必要项，去掉 deepep / HCCL 大 buffer 等
+# Env vars: keep only the essentials; drop deepep / large HCCL buffer, etc.
 _ENVS = {
     "SGLANG_SET_CPU_AFFINITY": "1",
     "ASCEND_USE_FIA": "1",
     "STREAMS_PER_DEVICE": "32",
     "HCCL_SOCKET_IFNAME": "lo",
     "GLOO_SOCKET_IFNAME": "lo",
-    "TORCH_COMPILE_DISABLE": "1",         # 新增
-    "SGLANG_ENABLE_TORCH_COMPILE": "0",   # 新增
+    "TORCH_COMPILE_DISABLE": "1",         # added
+    "SGLANG_ENABLE_TORCH_COMPILE": "0",   # added
 }
 
 _POOL_LOG_PATTERN = re.compile(
