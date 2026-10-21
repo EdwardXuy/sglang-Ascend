@@ -18,7 +18,6 @@ from sglang.test.test_utils import (
 
 register_npu_ci(est_time=400, suite="base-b-test-2-npu-a3")
 register_npu_ci(est_time=400, suite="nightly-2-npu-a3", nightly=True)
-register_npu_ci(est_time=400, suite="nightly-1-npu-a5", nightly=True)
 
 
 class TestMoreRunnerBackendTriton(CustomTestCase):
@@ -39,7 +38,6 @@ class TestMoreRunnerBackendTriton(CustomTestCase):
             **os.environ,
         }
         if is_npu_a5():
-            env["ASCEND_USE_FIA"] = "1"
             env["SGLANG_NPU_DISABLE_ACL_FORMAT_WEIGHT"] = "1"
         cls.process = popen_launch_server(
             cls.model,

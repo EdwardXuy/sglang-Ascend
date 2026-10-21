@@ -28,7 +28,7 @@ class TestNpuTrainInferenceConsistencyTP4(CustomTestCase):
     """
 
     MODEL = QWEN3_30B_A3B_WEIGHTS_PATH
-    BASE_URL = "http://127.0.0.1:22100"
+    BASE_URL = DEFAULT_URL_FOR_TEST
 
     OTHER_ARGS = [
         "--trust-remote-code",

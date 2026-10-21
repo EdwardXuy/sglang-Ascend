@@ -28,7 +28,7 @@ class TestNpuBatchInvarianceNoTp(CustomTestCase):
     """
 
     MODEL = QWEN3_4B_WEIGHTS_PATH
-    BASE_URL = "http://127.0.0.1:22200"
+    BASE_URL = DEFAULT_URL_FOR_TEST
 
     OTHER_ARGS = [
         "--trust-remote-code",

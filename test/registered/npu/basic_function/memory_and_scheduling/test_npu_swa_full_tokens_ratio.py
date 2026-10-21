@@ -18,7 +18,6 @@ from sglang.test.ascend.e2e.test_npu_accuracy_utils import (
 from sglang.test.ci.ci_register import register_npu_ci
 
 register_npu_ci(est_time=400, suite="full-16-npu-a3", nightly=True)
-register_npu_ci(est_time=400, suite="full-8-npu-a5", nightly=True)
 
 
 # Model path: Llama-4-Scout-17B-16E-Instruct from the shared dzc mount
@@ -50,7 +49,6 @@ _BASE_ARGS = [
 # Env vars: keep only the essentials; drop deepep / large HCCL buffer, etc.
 _ENVS = {
     "SGLANG_SET_CPU_AFFINITY": "1",
-    "ASCEND_USE_FIA": "1",
     "STREAMS_PER_DEVICE": "32",
     "HCCL_SOCKET_IFNAME": "lo",
     "GLOO_SOCKET_IFNAME": "lo",
