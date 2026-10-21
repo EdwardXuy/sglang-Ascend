@@ -49,6 +49,7 @@ _BASE_ARGS = [
 # Env vars: keep only the essentials; drop deepep / large HCCL buffer, etc.
 _ENVS = {
     "SGLANG_SET_CPU_AFFINITY": "1",
+    "ASCEND_USE_FIA": "1",
     "STREAMS_PER_DEVICE": "32",
     "HCCL_SOCKET_IFNAME": "lo",
     "GLOO_SOCKET_IFNAME": "lo",
